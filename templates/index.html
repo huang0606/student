@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .table {
+            border-collapse: collapse;
+        }
+        .table td {
+            border: 1px solid black;
+        }
+        .table th {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<table border="1">
+    <tr>
+        <th><h1>{{title}}</h1></th>
+    </tr>
+    <tr>
+        <th><h3>入学登记</h3></th>
+    </tr>
+    <tr>
+        <th><h3>添加学生:</h3></th>
+    </tr>
+</table>
+
+
+<form method="POST" action="add_student.html" enctype="application/x-www-form-urlencoded">
+    学生姓名name：<br>
+    <input type="text" name="name"><br>
+    学生学号number： <br>
+    <input type="text" name="number"><br>
+    学生年龄 age： <br>
+    <input type="text" name="age"><br>
+    学生性别 gender：<br>
+
+    <input type="radio" name="gender" value="男" checked>男
+    <br>
+    <input type="radio" name="gender" value="女">女
+
+    学生班级grade： <br>
+    <input type="text" name="grade">
+    <br>
+    <br>
+    地址 address： <br>
+    <textarea name="address"></textarea>
+    <br>
+    <br>
+    <br>
+    <input type="submit" value="成功登记">
+    <br>
+    <br>
+</form>
+
+<table border="1">
+    <tr>
+        <th><h3>查看学生列表</h3></th>
+    </tr>
+</table>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>地址</th>
+            <th>班級</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for student in students %}
+        <tr>
+            <td>{{student.number}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.gender}}</td>
+            <td>{{student.age}}</td>
+            <td>{{student.address}}</td>
+            <td>{{student.grade}}</td>
+            <td>
+                <form method="POST" action="del_student.html" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="student" value="{{student.number}}">
+                    <input type="submit" value="删除">
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+
+</html>
